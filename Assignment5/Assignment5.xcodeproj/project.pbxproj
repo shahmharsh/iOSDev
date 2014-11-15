@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		035CD6DB1A16F6B200D2C612 /* HSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D11A16F6B200D2C612 /* HSConstants.m */; };
 		035CD6DC1A16F6B200D2C612 /* HSInstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D31A16F6B200D2C612 /* HSInstructor.m */; };
-		035CD6DD1A16F6B200D2C612 /* HSInstructorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D51A16F6B200D2C612 /* HSInstructorInfoViewController.m */; };
+		035CD6DD1A16F6B200D2C612 /* HSInstructorInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D51A16F6B200D2C612 /* HSInstructorInfoTableViewController.m */; };
 		035CD6DE1A16F6B200D2C612 /* HSInstructorsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D71A16F6B200D2C612 /* HSInstructorsTableViewController.m */; };
 		035CD6DF1A16F6B200D2C612 /* HSRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D91A16F6B200D2C612 /* HSRateView.m */; };
 		0368CB4E1A15D8A000C22A01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0368CB4D1A15D8A000C22A01 /* main.m */; };
@@ -35,8 +35,8 @@
 		035CD6D11A16F6B200D2C612 /* HSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSConstants.m; sourceTree = "<group>"; };
 		035CD6D21A16F6B200D2C612 /* HSInstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSInstructor.h; sourceTree = "<group>"; };
 		035CD6D31A16F6B200D2C612 /* HSInstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSInstructor.m; sourceTree = "<group>"; };
-		035CD6D41A16F6B200D2C612 /* HSInstructorInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSInstructorInfoViewController.h; sourceTree = "<group>"; };
-		035CD6D51A16F6B200D2C612 /* HSInstructorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSInstructorInfoViewController.m; sourceTree = "<group>"; };
+		035CD6D41A16F6B200D2C612 /* HSInstructorInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSInstructorInfoTableViewController.h; sourceTree = "<group>"; };
+		035CD6D51A16F6B200D2C612 /* HSInstructorInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSInstructorInfoTableViewController.m; sourceTree = "<group>"; };
 		035CD6D61A16F6B200D2C612 /* HSInstructorsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSInstructorsTableViewController.h; sourceTree = "<group>"; };
 		035CD6D71A16F6B200D2C612 /* HSInstructorsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSInstructorsTableViewController.m; sourceTree = "<group>"; };
 		035CD6D81A16F6B200D2C612 /* HSRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSRateView.h; sourceTree = "<group>"; };
@@ -99,8 +99,8 @@
 				035CD6D11A16F6B200D2C612 /* HSConstants.m */,
 				035CD6D21A16F6B200D2C612 /* HSInstructor.h */,
 				035CD6D31A16F6B200D2C612 /* HSInstructor.m */,
-				035CD6D41A16F6B200D2C612 /* HSInstructorInfoViewController.h */,
-				035CD6D51A16F6B200D2C612 /* HSInstructorInfoViewController.m */,
+				035CD6D41A16F6B200D2C612 /* HSInstructorInfoTableViewController.h */,
+				035CD6D51A16F6B200D2C612 /* HSInstructorInfoTableViewController.m */,
 				035CD6D61A16F6B200D2C612 /* HSInstructorsTableViewController.h */,
 				035CD6D71A16F6B200D2C612 /* HSInstructorsTableViewController.m */,
 				035CD6D81A16F6B200D2C612 /* HSRateView.h */,
@@ -245,7 +245,7 @@
 				0368CB4E1A15D8A000C22A01 /* main.m in Sources */,
 				035CD6DC1A16F6B200D2C612 /* HSInstructor.m in Sources */,
 				035CD6DF1A16F6B200D2C612 /* HSRateView.m in Sources */,
-				035CD6DD1A16F6B200D2C612 /* HSInstructorInfoViewController.m in Sources */,
+				035CD6DD1A16F6B200D2C612 /* HSInstructorInfoTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

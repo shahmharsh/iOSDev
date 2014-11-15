@@ -12,9 +12,12 @@
 
 @property NSString *firstName;
 @property NSString *lastName;
-@property NSUInteger instructorID;
+@property NSInteger instructorID;
+@property NSString *office;
+@property NSString *phone;
+@property NSString *email;
 
--(id) initWithInstructorID:(NSUInteger) instructorID FirstName:(NSString *) firstName LastName:(NSString *) lastName;
+-(id) initWithInstructorID:(NSInteger) instructorID FirstName:(NSString *) firstName LastName:(NSString *) lastName;
 -(NSString *)fullName;
 
 @end

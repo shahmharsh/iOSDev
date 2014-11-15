@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "HSInstructor.h"
 
-@interface HSInstructorInfoViewController : UIViewController
+@interface HSInstructorInfoTableViewController : UITableViewController
 
 @property HSInstructor *instructor;
+@property NSMutableArray *dataArray;
+
+@property (strong, nonatomic) IBOutlet UITableView *instructorInfoTable;
 
 -(void) getInstructorData;
+-(void) populateTable;
 
 @end

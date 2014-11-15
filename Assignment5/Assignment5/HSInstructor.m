@@ -11,8 +11,9 @@
 @implementation HSInstructor
 @synthesize firstName = _firstName, lastName = _lastName;
 @synthesize instructorID = _instructorID;
+@synthesize office = _office, phone = _phone, email = _email;
 
--(id)initWithInstructorID:(NSUInteger)instructorID FirstName:(NSString *)firstName LastName:(NSString *)lastName {
+-(id)initWithInstructorID:(NSInteger)instructorID FirstName:(NSString *)firstName LastName:(NSString *)lastName {
     if (self = [super init]) {
         _instructorID = instructorID;
         _firstName = firstName;

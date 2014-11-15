@@ -9,7 +9,7 @@
 #import "HSInstructorsTableViewController.h"
 #import "HSConstants.h"
 #import "HSInstructor.h"
-#import "HSInstructorInfoViewController.h"
+#import "HSInstructorInfoTableViewController.h"
 
 @interface HSInstructorsTableViewController ()
 
@@ -63,7 +63,6 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:HSInstructorCellIdentifier];
     
     if (cell == nil) {
@@ -83,7 +82,7 @@
     if ([segue.identifier isEqualToString:HSSequeIdentifierShowInstructorDetail]) {
         NSIndexPath *indexPath = [_tableView indexPathForSelectedRow];
         NSUInteger row = indexPath.row;
-        HSInstructorInfoViewController *instructorInfoViewController = segue.destinationViewController;
+        HSInstructorInfoTableViewController *instructorInfoViewController = segue.destinationViewController;
         instructorInfoViewController.instructor = _instructors[row];
     }
 }
