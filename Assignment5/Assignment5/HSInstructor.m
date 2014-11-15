@@ -6,8 +6,24 @@
 //  Copyright (c) 2014 Harsh Shah. All rights reserved.
 //
 
-#import "Instructor.h"
+#import "HSInstructor.h"
 
-@implementation Instructor
+@implementation HSInstructor
+@synthesize firstName = _firstName, lastName = _lastName;
+@synthesize instructorID = _instructorID;
+
+-(id)initWithInstructorID:(NSUInteger)instructorID FirstName:(NSString *)firstName LastName:(NSString *)lastName {
+    if (self = [super init]) {
+        _instructorID = instructorID;
+        _firstName = firstName;
+        _lastName = lastName;
+    }
+    
+    return self;
+}
+
+-(NSString *)fullName {
+    return [NSString stringWithFormat:@"%@ %@", _firstName, _lastName];
+}
 
 @end

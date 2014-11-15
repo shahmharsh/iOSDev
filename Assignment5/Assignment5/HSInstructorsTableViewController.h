@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InstructorsTableViewController : UITableViewController
+@interface HSInstructorsTableViewController : UITableViewController
+
+@property NSMutableArray *instructors;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+-(void) populateTable;
 
 @end

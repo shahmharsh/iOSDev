@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		035CD6DB1A16F6B200D2C612 /* HSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D11A16F6B200D2C612 /* HSConstants.m */; };
+		035CD6DC1A16F6B200D2C612 /* HSInstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D31A16F6B200D2C612 /* HSInstructor.m */; };
+		035CD6DD1A16F6B200D2C612 /* HSInstructorInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D51A16F6B200D2C612 /* HSInstructorInfoViewController.m */; };
+		035CD6DE1A16F6B200D2C612 /* HSInstructorsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D71A16F6B200D2C612 /* HSInstructorsTableViewController.m */; };
+		035CD6DF1A16F6B200D2C612 /* HSRateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D91A16F6B200D2C612 /* HSRateView.m */; };
 		0368CB4E1A15D8A000C22A01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0368CB4D1A15D8A000C22A01 /* main.m */; };
 		0368CB511A15D8A000C22A01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0368CB501A15D8A000C22A01 /* AppDelegate.m */; };
-		0368CB541A15D8A000C22A01 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0368CB531A15D8A000C22A01 /* ViewController.m */; };
 		0368CB571A15D8A000C22A01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0368CB551A15D8A000C22A01 /* Main.storyboard */; };
 		0368CB591A15D8A000C22A01 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0368CB581A15D8A000C22A01 /* Images.xcassets */; };
 		0368CB5C1A15D8A000C22A01 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0368CB5A1A15D8A000C22A01 /* LaunchScreen.xib */; };
@@ -27,13 +31,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		035CD6D01A16F6B200D2C612 /* HSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSConstants.h; sourceTree = "<group>"; };
+		035CD6D11A16F6B200D2C612 /* HSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSConstants.m; sourceTree = "<group>"; };
+		035CD6D21A16F6B200D2C612 /* HSInstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSInstructor.h; sourceTree = "<group>"; };
+		035CD6D31A16F6B200D2C612 /* HSInstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSInstructor.m; sourceTree = "<group>"; };
+		035CD6D41A16F6B200D2C612 /* HSInstructorInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSInstructorInfoViewController.h; sourceTree = "<group>"; };
+		035CD6D51A16F6B200D2C612 /* HSInstructorInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSInstructorInfoViewController.m; sourceTree = "<group>"; };
+		035CD6D61A16F6B200D2C612 /* HSInstructorsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSInstructorsTableViewController.h; sourceTree = "<group>"; };
+		035CD6D71A16F6B200D2C612 /* HSInstructorsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSInstructorsTableViewController.m; sourceTree = "<group>"; };
+		035CD6D81A16F6B200D2C612 /* HSRateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSRateView.h; sourceTree = "<group>"; };
+		035CD6D91A16F6B200D2C612 /* HSRateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSRateView.m; sourceTree = "<group>"; };
 		0368CB481A15D8A000C22A01 /* Assignment5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment5.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0368CB4C1A15D8A000C22A01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0368CB4D1A15D8A000C22A01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0368CB4F1A15D8A000C22A01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0368CB501A15D8A000C22A01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		0368CB521A15D8A000C22A01 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0368CB531A15D8A000C22A01 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0368CB561A15D8A000C22A01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0368CB581A15D8A000C22A01 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0368CB5B1A15D8A000C22A01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -83,11 +95,19 @@
 			children = (
 				0368CB4F1A15D8A000C22A01 /* AppDelegate.h */,
 				0368CB501A15D8A000C22A01 /* AppDelegate.m */,
-				0368CB521A15D8A000C22A01 /* ViewController.h */,
-				0368CB531A15D8A000C22A01 /* ViewController.m */,
-				0368CB551A15D8A000C22A01 /* Main.storyboard */,
+				035CD6D01A16F6B200D2C612 /* HSConstants.h */,
+				035CD6D11A16F6B200D2C612 /* HSConstants.m */,
+				035CD6D21A16F6B200D2C612 /* HSInstructor.h */,
+				035CD6D31A16F6B200D2C612 /* HSInstructor.m */,
+				035CD6D41A16F6B200D2C612 /* HSInstructorInfoViewController.h */,
+				035CD6D51A16F6B200D2C612 /* HSInstructorInfoViewController.m */,
+				035CD6D61A16F6B200D2C612 /* HSInstructorsTableViewController.h */,
+				035CD6D71A16F6B200D2C612 /* HSInstructorsTableViewController.m */,
+				035CD6D81A16F6B200D2C612 /* HSRateView.h */,
+				035CD6D91A16F6B200D2C612 /* HSRateView.m */,
 				0368CB581A15D8A000C22A01 /* Images.xcassets */,
 				0368CB5A1A15D8A000C22A01 /* LaunchScreen.xib */,
+				0368CB551A15D8A000C22A01 /* Main.storyboard */,
 				0368CB4B1A15D8A000C22A01 /* Supporting Files */,
 			);
 			path = Assignment5;
@@ -219,9 +239,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0368CB541A15D8A000C22A01 /* ViewController.m in Sources */,
+				035CD6DB1A16F6B200D2C612 /* HSConstants.m in Sources */,
 				0368CB511A15D8A000C22A01 /* AppDelegate.m in Sources */,
+				035CD6DE1A16F6B200D2C612 /* HSInstructorsTableViewController.m in Sources */,
 				0368CB4E1A15D8A000C22A01 /* main.m in Sources */,
+				035CD6DC1A16F6B200D2C612 /* HSInstructor.m in Sources */,
+				035CD6DF1A16F6B200D2C612 /* HSRateView.m in Sources */,
+				035CD6DD1A16F6B200D2C612 /* HSInstructorInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +436,7 @@
 				0368CB6D1A15D8A000C22A01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0368CB6E1A15D8A000C22A01 /* Build configuration list for PBXNativeTarget "Assignment5Tests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +445,7 @@
 				0368CB701A15D8A000C22A01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

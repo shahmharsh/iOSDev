@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InstructorDetailsTableViewController : UITableViewController
+@interface HSInstructorInfoViewController : UIViewController
 
 @end

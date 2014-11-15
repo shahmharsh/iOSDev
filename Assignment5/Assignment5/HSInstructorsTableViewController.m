@@ -6,22 +6,23 @@
 //  Copyright (c) 2014 Harsh Shah. All rights reserved.
 //
 
-#import "InstructorsTableViewController.h"
+#import "HSInstructorsTableViewController.h"
+#import "HSConstants.h"
+#import "HSInstructor.h"
 
-@interface InstructorsTableViewController ()
+@interface HSInstructorsTableViewController ()
 
 @end
 
-@implementation InstructorsTableViewController
+@implementation HSInstructorsTableViewController
+@synthesize instructors = _instructors;
+@synthesize tableView = _tableView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    _instructors = [[NSMutableArray alloc] init];
+    //_tableView.delegate = self;
+    [self populateTable];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,29 +30,50 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)populateTable {
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:HSGetInstructorNameURL]
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                for (NSInteger i=0; i < [json count]; i++) {
+                                                    NSDictionary *subDictionary = [json objectAtIndex:i];
+                                                    NSString *firstName = [subDictionary objectForKey:HSKeyFirstName];
+                                                    NSString *lastName = [subDictionary objectForKey:HSKeyLastName];
+                                                    NSUInteger instructorID = [[subDictionary objectForKey:HSKeyInstructorID] integerValue];
+                                                    HSInstructor *instructor = [[HSInstructor alloc] initWithInstructorID:instructorID FirstName:firstName LastName:lastName];
+                                                    [_instructors addObject:instructor];
+                                                }
+                                                // reload table view data on main thread
+                                                dispatch_async(dispatch_get_main_queue(), ^ {
+                                                    [_tableView reloadData];
+                                                });
+                                            }];
+    
+    [dataTask resume];
+
+}
+
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [_instructors count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:HSInstructorCellIdentifier];
     
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HSInstructorCellIdentifier];
+    }
+    
+    NSUInteger row = indexPath.row;
+    cell.textLabel.text = [_instructors[row] fullName];
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

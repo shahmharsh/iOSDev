@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Instructor : NSObject
+@interface HSInstructor : NSObject
+
+@property NSString *firstName;
+@property NSString *lastName;
+@property NSUInteger instructorID;
+
+-(id) initWithInstructorID:(NSUInteger) instructorID FirstName:(NSString *) firstName LastName:(NSString *) lastName;
+-(NSString *)fullName;
 
 @end

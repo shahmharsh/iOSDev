@@ -7,3 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HSConstants.h"
+
+NSString *const HSGetInstructorNameURL = @"http://bismarck.sdsu.edu/rateme/list";
+
+NSString *const HSKeyFirstName = @"firstName";
+NSString *const HSKeyLastName = @"lastName";
+NSString *const HSKeyInstructorID = @"id";
+
+NSString *const HSInstructorCellIdentifier = @"InstructorCell";
+NSString *const HSSequeIdentifierShowInstructorDetail = @"showInstructorDetails";

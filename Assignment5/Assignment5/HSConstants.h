@@ -6,8 +6,13 @@
 //  Copyright (c) 2014 Harsh Shah. All rights reserved.
 //
 
-#ifndef Assignment5_Constants_h
-#define Assignment5_Constants_h
+#import <Foundation/Foundation.h>
 
+NSString *const HSGetInstructorNameURL;
 
-#endif
+NSString *const HSKeyFirstName;
+NSString *const HSKeyLastName;
+NSString *const HSKeyInstructorID;
+
+NSString *const HSInstructorCellIdentifier;
+NSString *const HSSequeIdentifierShowInstructorDetail;
