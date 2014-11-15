@@ -10,14 +10,14 @@
 	<string>Assignment4</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CF3B9209EFD973A2F136CC4091C210E34265CA07</key>
+		<key>D5CFCD9CE1657533D86CB328C9CF886BDE4EF589</key>
 		<string>github.com:shahmharsh/iOSDev.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Assignment4/Assignment4.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CF3B9209EFD973A2F136CC4091C210E34265CA07</key>
+		<key>D5CFCD9CE1657533D86CB328C9CF886BDE4EF589</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CF3B9209EFD973A2F136CC4091C210E34265CA07</string>
+	<string>D5CFCD9CE1657533D86CB328C9CF886BDE4EF589</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CF3B9209EFD973A2F136CC4091C210E34265CA07</string>
+			<string>D5CFCD9CE1657533D86CB328C9CF886BDE4EF589</string>
 			<key>IDESourceControlWCCName</key>
 			<string>iOS%20dev%20course</string>
 		</dict>

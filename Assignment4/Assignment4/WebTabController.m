@@ -23,6 +23,10 @@
     urlTextField.delegate = self;
     webView.delegate = self;
     loadingIndicator.hidden = YES;
+    
+    urlTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [[webView layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[webView layer] setBorderWidth:.5];
 }
 
 - (void)didReceiveMemoryWarning {

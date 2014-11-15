@@ -34,6 +34,10 @@
     progressSwitch.on = NO;
     [activityIndicator stopAnimating];
     
+    [[textView layer] setBorderColor:[[UIColor grayColor] CGColor]];
+    [[textView layer] setBorderWidth:.5];
+    [[textView layer] setCornerRadius:10];
+    
     alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Do you like iPhone?" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
 }
 
