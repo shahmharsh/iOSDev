@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "HSInstructor.h"
+#import "HSRateView.h"
 
-@interface HSInstructorInfoTableViewController : UITableViewController
+@interface HSInstructorInfoTableViewController : UITableViewController<HSRateViewDelegate>
 
 @property HSInstructor *instructor;
 @property NSMutableArray *dataArray;

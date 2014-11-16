@@ -18,13 +18,29 @@ NSString *const HSKeyInstructorID = @"id";
 NSString *const HSKeyOffice = @"office";
 NSString *const HSKeyPhone = @"phone";
 NSString *const HSKeyEmail = @"email";
+NSString *const HSKeyRating = @"rating";
+NSString *const HSKeyRatingAverage = @"average";
+NSString *const HSKeyRatingTotal = @"totalRatings";
 
 NSString *const HSTitleName = @"Instructor Name";
 NSString *const HSTitleOffice = @"Office";
 NSString *const HSTitlePhone = @"Phone";
 NSString *const HSTitleEmail = @"Email";
+NSString *const HSTitleRating = @"Rating";
+
+NSInteger const HSTableViewSectionName = 0;
+NSInteger const HSTableViewSectionOffice = 1;
+NSInteger const HSTableViewSectionPhone = 2;
+NSInteger const HSTableViewSectionEmail = 3;
+NSInteger const HSTableViewSectionRating = 4;
+
 
 NSString *const HSInstructorCellIdentifier = @"InstructorCell";
 NSString *const HSInstructorInfoCellIdentifier = @"InstructorInfoCell";
+NSString *const HSRatingCellIdentifier = @"RatingTableCell";
 
 NSString *const HSSequeIdentifierShowInstructorDetail = @"showInstructorDetails";
+NSString *const HSRatingCellNib = @"HSTableViewRatingCell";
+
+NSString *const HSImageStarFull = @"StarFull.png";
+NSString *const HSImageStarEmpty = @"StarEmpty.png";

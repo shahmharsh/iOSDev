@@ -12,6 +12,7 @@
 @synthesize firstName = _firstName, lastName = _lastName;
 @synthesize instructorID = _instructorID;
 @synthesize office = _office, phone = _phone, email = _email;
+@synthesize averageRating = _averageRating, totalRatings = _totalRatings;
 
 -(id)initWithInstructorID:(NSInteger)instructorID FirstName:(NSString *)firstName LastName:(NSString *)lastName {
     if (self = [super init]) {

@@ -8,6 +8,7 @@
 
 #import "HSInstructorInfoTableViewController.h"
 #import "HSConstants.h"
+#import "HSRatingTableCell.h"
 
 @interface HSInstructorInfoTableViewController ()
 
@@ -21,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [_instructor fullName];
+    _instructorInfoTable.rowHeight = 44;
     _dataArray = [[NSMutableArray alloc] init];
     [self getInstructorData];
 }
@@ -39,10 +41,16 @@
                                                 NSString *office = [instructorData objectForKey:HSKeyOffice];
                                                 NSString *phone = [instructorData objectForKey:HSKeyPhone];
                                                 NSString *email = [instructorData objectForKey:HSKeyEmail];
+                                                NSDictionary *allRating = [instructorData objectForKey:HSKeyRating];
+                                                
+                                                NSNumber *averageRating = [NSNumber numberWithFloat:[[allRating objectForKey:HSKeyRatingAverage] floatValue]];
+                                                NSInteger totalRatings = [[allRating objectForKey:HSKeyRatingTotal] integerValue];
                                                 
                                                 [_instructor setOffice:office];
                                                 [_instructor setPhone:phone];
                                                 [_instructor setEmail:email];
+                                                [_instructor setAverageRating:averageRating];
+                                                [_instructor setTotalRatings:totalRatings];
                                                 
                                                 // reload table view data on main thread
                                                 dispatch_async(dispatch_get_main_queue(), ^ {
@@ -64,6 +72,11 @@
     NSArray *email = [[NSArray alloc] initWithObjects:[_instructor email], nil];
     [_dataArray addObject:email];
     
+    //NSLog(@"Average: %@ Total: %ld",[_instructor averageRating], [_instructor totalRatings]);
+    NSArray *ratings = [[NSArray alloc] initWithObjects:[_instructor averageRating], [NSNumber numberWithInteger: [_instructor totalRatings]], nil];
+    NSArray *ratingArray = [[NSArray alloc] initWithObjects:ratings, nil];
+    [_dataArray addObject:ratingArray];
+    
     [_instructorInfoTable reloadData];
 }
 
@@ -80,14 +93,16 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *title = @"";
-    if(section == 0) {
+    if(section == HSTableViewSectionName) {
         title = HSTitleName;
-    } else if(section == 1) {
+    } else if(section == HSTableViewSectionOffice) {
         title = HSTitleOffice;
-    } else if(section == 2) {
+    } else if(section == HSTableViewSectionPhone) {
         title = HSTitlePhone;
-    } else if(section == 3) {
+    } else if(section == HSTableViewSectionEmail) {
         title = HSTitleEmail;
+    } else if(section == HSTableViewSectionRating) {
+        title = HSTitleRating;
     }
     
     return title;
@@ -95,18 +110,35 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = indexPath.section;
     
-    UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:HSInstructorInfoCellIdentifier];
+    if (section == HSTableViewSectionRating) {
+        
+        HSRatingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:HSRatingCellIdentifier];
+        if (cell == nil) {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:HSRatingCellNib owner:self options:nil];
+            cell = [nib objectAtIndex:0];
+            [cell.rating setMaxRating:5];
+        }
+        NSArray *array = [_dataArray objectAtIndex:section];
+        NSArray *ratings = [array objectAtIndex:indexPath.row];
+        NSNumber *averageRating = [ratings objectAtIndex:0];
+        NSString *totalRatings = [NSString stringWithFormat:@"(%@)", [ratings objectAtIndex:1]];
+        [cell.rating setRating:[averageRating integerValue]];
+        cell.textViewTotalRating.text = totalRatings;
+        return cell;
+    } else {
+        UITableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:HSInstructorInfoCellIdentifier];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HSInstructorInfoCellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HSInstructorInfoCellIdentifier];
+        }
+    
+        NSArray *array = [_dataArray objectAtIndex:section];
+        cell.textLabel.text = [array objectAtIndex:indexPath.row];
+        return cell;
     }
-    
-    NSArray *array = [_dataArray objectAtIndex:indexPath.section];
-    cell.textLabel.text = [array objectAtIndex:indexPath.row];
-    return cell;
 }
-
 
 
 @end

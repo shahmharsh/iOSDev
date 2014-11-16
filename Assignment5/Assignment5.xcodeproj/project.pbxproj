@@ -18,6 +18,10 @@
 		0368CB591A15D8A000C22A01 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0368CB581A15D8A000C22A01 /* Images.xcassets */; };
 		0368CB5C1A15D8A000C22A01 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0368CB5A1A15D8A000C22A01 /* LaunchScreen.xib */; };
 		0368CB681A15D8A000C22A01 /* Assignment5Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0368CB671A15D8A000C22A01 /* Assignment5Tests.m */; };
+		03EA17021A19115000A429D6 /* HSTableViewRatingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03EA17011A19115000A429D6 /* HSTableViewRatingCell.xib */; };
+		03EA17081A1912B300A429D6 /* HSRatingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EA17071A1912B300A429D6 /* HSRatingTableCell.m */; };
+		03EA170B1A1918B800A429D6 /* StarEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EA17091A1918B800A429D6 /* StarEmpty.png */; };
+		03EA170C1A1918B800A429D6 /* StarFull.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EA170A1A1918B800A429D6 /* StarFull.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,11 @@
 		0368CB611A15D8A000C22A01 /* Assignment5Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment5Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0368CB661A15D8A000C22A01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0368CB671A15D8A000C22A01 /* Assignment5Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Assignment5Tests.m; sourceTree = "<group>"; };
+		03EA17011A19115000A429D6 /* HSTableViewRatingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSTableViewRatingCell.xib; sourceTree = "<group>"; };
+		03EA17061A1912B300A429D6 /* HSRatingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSRatingTableCell.h; sourceTree = "<group>"; };
+		03EA17071A1912B300A429D6 /* HSRatingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSRatingTableCell.m; sourceTree = "<group>"; };
+		03EA17091A1918B800A429D6 /* StarEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarEmpty.png; sourceTree = "<group>"; };
+		03EA170A1A1918B800A429D6 /* StarFull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarFull.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +84,8 @@
 		0368CB3F1A15D8A000C22A01 = {
 			isa = PBXGroup;
 			children = (
+				03EA17091A1918B800A429D6 /* StarEmpty.png */,
+				03EA170A1A1918B800A429D6 /* StarFull.png */,
 				0368CB4A1A15D8A000C22A01 /* Assignment5 */,
 				0368CB641A15D8A000C22A01 /* Assignment5Tests */,
 				0368CB491A15D8A000C22A01 /* Products */,
@@ -109,6 +120,9 @@
 				0368CB5A1A15D8A000C22A01 /* LaunchScreen.xib */,
 				0368CB551A15D8A000C22A01 /* Main.storyboard */,
 				0368CB4B1A15D8A000C22A01 /* Supporting Files */,
+				03EA17011A19115000A429D6 /* HSTableViewRatingCell.xib */,
+				03EA17061A1912B300A429D6 /* HSRatingTableCell.h */,
+				03EA17071A1912B300A429D6 /* HSRatingTableCell.m */,
 			);
 			path = Assignment5;
 			sourceTree = "<group>";
@@ -219,6 +233,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03EA170B1A1918B800A429D6 /* StarEmpty.png in Resources */,
+				03EA17021A19115000A429D6 /* HSTableViewRatingCell.xib in Resources */,
+				03EA170C1A1918B800A429D6 /* StarFull.png in Resources */,
 				0368CB571A15D8A000C22A01 /* Main.storyboard in Resources */,
 				0368CB5C1A15D8A000C22A01 /* LaunchScreen.xib in Resources */,
 				0368CB591A15D8A000C22A01 /* Images.xcassets in Resources */,
@@ -243,6 +260,7 @@
 				0368CB511A15D8A000C22A01 /* AppDelegate.m in Sources */,
 				035CD6DE1A16F6B200D2C612 /* HSInstructorsTableViewController.m in Sources */,
 				0368CB4E1A15D8A000C22A01 /* main.m in Sources */,
+				03EA17081A1912B300A429D6 /* HSRatingTableCell.m in Sources */,
 				035CD6DC1A16F6B200D2C612 /* HSInstructor.m in Sources */,
 				035CD6DF1A16F6B200D2C612 /* HSRateView.m in Sources */,
 				035CD6DD1A16F6B200D2C612 /* HSInstructorInfoTableViewController.m in Sources */,

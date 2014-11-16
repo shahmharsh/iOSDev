@@ -7,6 +7,7 @@
 //
 
 #import "HSRateView.h"
+#import "HSConstants.h"
 
 @implementation HSRateView
 @synthesize notSelectedImage = _notSelectedImage;
@@ -21,8 +22,8 @@
 @synthesize delegate = _delegate;
 
 - (void)baseInit {
-    _notSelectedImage = nil;
-    _fullSelectedImage = nil;
+    _notSelectedImage = [UIImage imageNamed:HSImageStarEmpty];
+    _fullSelectedImage = [UIImage imageNamed:HSImageStarFull];
     _rating = 0;
     _editable = NO;
     _imageViews = [[NSMutableArray alloc] init];
@@ -121,7 +122,7 @@
     if (!self.editable) return;
     
     int newRating = 0;
-    for(int i = self.imageViews.count - 1; i >= 0; i--) {
+    for(int i = _imageViews.count - 1; i >= 0; i--) {
         UIImageView *imageView = [self.imageViews objectAtIndex:i];
         if (touchLocation.x > imageView.frame.origin.x) {
             newRating = i+1;

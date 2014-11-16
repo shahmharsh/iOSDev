@@ -16,6 +16,8 @@
 @property NSString *office;
 @property NSString *phone;
 @property NSString *email;
+@property NSNumber *averageRating;
+@property NSInteger totalRatings;
 
 -(id) initWithInstructorID:(NSInteger) instructorID FirstName:(NSString *) firstName LastName:(NSString *) lastName;
 -(NSString *)fullName;
