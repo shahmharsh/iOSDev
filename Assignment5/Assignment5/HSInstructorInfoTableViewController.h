@@ -10,7 +10,7 @@
 #import "HSInstructor.h"
 #import "HSRateView.h"
 
-@interface HSInstructorInfoTableViewController : UITableViewController<HSRateViewDelegate>
+@interface HSInstructorInfoTableViewController : UITableViewController
 
 @property HSInstructor *instructor;
 @property NSMutableArray *dataArray;

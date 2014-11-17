@@ -35,7 +35,7 @@
 -(void)getInstructorData {
     NSURLSession *session = [NSURLSession sharedSession];
     NSString *getInstructorInfoURL = [NSString stringWithFormat:@"%@%ld",HSGetInstructorInfoURL, (long)_instructor.instructorID];
-    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:getInstructorInfoURL]
+    NSURLSessionDataTask *dataTaskGetInstructorInfo = [session dataTaskWithURL:[NSURL URLWithString:getInstructorInfoURL]
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                 NSDictionary *instructorData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                                 NSString *office = [instructorData objectForKey:HSKeyOffice];
@@ -58,7 +58,7 @@
                                                 });
                                             }];
     
-    [dataTask resume];
+    [dataTaskGetInstructorInfo resume];
 
 }
 
@@ -92,7 +92,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *title = @"";
+    NSString *title = nil;
     if(section == HSTableViewSectionName) {
         title = HSTitleName;
     } else if(section == HSTableViewSectionOffice) {
@@ -113,18 +113,29 @@
     NSInteger section = indexPath.section;
     
     if (section == HSTableViewSectionRating) {
-        
         HSRatingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:HSRatingCellIdentifier];
+        
         if (cell == nil) {
             NSArray *nib = [[NSBundle mainBundle] loadNibNamed:HSRatingCellNib owner:self options:nil];
             cell = [nib objectAtIndex:0];
             [cell.rating setMaxRating:5];
         }
+        
         NSArray *array = [_dataArray objectAtIndex:section];
         NSArray *ratings = [array objectAtIndex:indexPath.row];
         NSNumber *averageRating = [ratings objectAtIndex:0];
         NSString *totalRatings = [NSString stringWithFormat:@"(%@)", [ratings objectAtIndex:1]];
-        [cell.rating setRating:[averageRating integerValue]];
+        float decimalValue = [averageRating floatValue] - [averageRating integerValue];
+        
+        if (decimalValue > 0.75) {
+            averageRating = [NSNumber numberWithInteger:([averageRating integerValue] + 1)];
+        } else if(decimalValue > 0.25){
+            averageRating = [NSNumber numberWithFloat:([averageRating integerValue] + 0.5)];
+        } else {
+            averageRating = [NSNumber numberWithFloat:[averageRating integerValue]];
+        }
+        
+        [cell.rating setRating: [averageRating floatValue]];
         cell.textViewTotalRating.text = totalRatings;
         return cell;
     } else {
@@ -138,6 +149,51 @@
         cell.textLabel.text = [array objectAtIndex:indexPath.row];
         return cell;
     }
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == HSTableViewSectionRating) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 2, (tableView.frame.size.width/2), 18)];
+        [label setFont:[UIFont boldSystemFontOfSize:17]];
+        [label setText:HSTitleRating];
+        [view addSubview:label];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [button addTarget:self
+                action:@selector(buttonClicked:)
+                forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:HSRateNow forState:UIControlStateNormal];
+        CGSize stringSize = [HSRateNow sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+        float buttonXPosition = tableView.frame.origin.x + tableView.frame.size.width - stringSize.width - 5;
+        [button setFrame:CGRectMake(buttonXPosition, 2, stringSize.width, 18)];
+        [view addSubview:button];
+        
+        [view setBackgroundColor:[UIColor colorWithRed:247/255.0f green:247/255.0f blue:247/255.0f alpha:1.0f]];
+        return view;
+    }
+    
+    return nil;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return (indexPath.section < HSTableViewSectionRating);
+}
+
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    return (action == @selector(copy:));
+}
+
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    if (action == @selector(copy:)) {
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        [[UIPasteboard generalPasteboard] setString:cell.textLabel.text];
+    }
+}
+
+-(void) buttonClicked:(UIButton*)sender
+{
+    NSLog(@"you clicked on button");
 }
 
 

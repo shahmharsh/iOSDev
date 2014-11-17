@@ -34,7 +34,6 @@ NSInteger const HSTableViewSectionPhone = 2;
 NSInteger const HSTableViewSectionEmail = 3;
 NSInteger const HSTableViewSectionRating = 4;
 
-
 NSString *const HSInstructorCellIdentifier = @"InstructorCell";
 NSString *const HSInstructorInfoCellIdentifier = @"InstructorInfoCell";
 NSString *const HSRatingCellIdentifier = @"RatingTableCell";
@@ -44,3 +43,6 @@ NSString *const HSRatingCellNib = @"HSTableViewRatingCell";
 
 NSString *const HSImageStarFull = @"StarFull.png";
 NSString *const HSImageStarEmpty = @"StarEmpty.png";
+NSString *const HSImageStarHalf = @"StarHalf.png";
+
+NSString *const HSRateNow = @"Rate Now";

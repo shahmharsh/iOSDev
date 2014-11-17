@@ -42,3 +42,6 @@ NSString *const HSRatingCellNib;
 
 NSString *const HSImageStarFull;
 NSString *const HSImageStarEmpty;
+NSString *const HSImageStarHalf;
+
+NSString *const HSRateNow;

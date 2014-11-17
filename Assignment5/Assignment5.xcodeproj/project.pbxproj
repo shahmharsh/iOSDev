@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0338D3251A19ABD000908F64 /* StarHalf.png in Resources */ = {isa = PBXBuildFile; fileRef = 0338D3241A19ABD000908F64 /* StarHalf.png */; };
 		035CD6DB1A16F6B200D2C612 /* HSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D11A16F6B200D2C612 /* HSConstants.m */; };
 		035CD6DC1A16F6B200D2C612 /* HSInstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D31A16F6B200D2C612 /* HSInstructor.m */; };
 		035CD6DD1A16F6B200D2C612 /* HSInstructorInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D51A16F6B200D2C612 /* HSInstructorInfoTableViewController.m */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0338D3241A19ABD000908F64 /* StarHalf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarHalf.png; sourceTree = "<group>"; };
 		035CD6D01A16F6B200D2C612 /* HSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSConstants.h; sourceTree = "<group>"; };
 		035CD6D11A16F6B200D2C612 /* HSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSConstants.m; sourceTree = "<group>"; };
 		035CD6D21A16F6B200D2C612 /* HSInstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSInstructor.h; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		0368CB3F1A15D8A000C22A01 = {
 			isa = PBXGroup;
 			children = (
+				0338D3241A19ABD000908F64 /* StarHalf.png */,
 				03EA17091A1918B800A429D6 /* StarEmpty.png */,
 				03EA170A1A1918B800A429D6 /* StarFull.png */,
 				0368CB4A1A15D8A000C22A01 /* Assignment5 */,
@@ -116,13 +119,13 @@
 				035CD6D71A16F6B200D2C612 /* HSInstructorsTableViewController.m */,
 				035CD6D81A16F6B200D2C612 /* HSRateView.h */,
 				035CD6D91A16F6B200D2C612 /* HSRateView.m */,
+				03EA17061A1912B300A429D6 /* HSRatingTableCell.h */,
+				03EA17071A1912B300A429D6 /* HSRatingTableCell.m */,
+				03EA17011A19115000A429D6 /* HSTableViewRatingCell.xib */,
 				0368CB581A15D8A000C22A01 /* Images.xcassets */,
 				0368CB5A1A15D8A000C22A01 /* LaunchScreen.xib */,
 				0368CB551A15D8A000C22A01 /* Main.storyboard */,
 				0368CB4B1A15D8A000C22A01 /* Supporting Files */,
-				03EA17011A19115000A429D6 /* HSTableViewRatingCell.xib */,
-				03EA17061A1912B300A429D6 /* HSRatingTableCell.h */,
-				03EA17071A1912B300A429D6 /* HSRatingTableCell.m */,
 			);
 			path = Assignment5;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0338D3251A19ABD000908F64 /* StarHalf.png in Resources */,
 				03EA170B1A1918B800A429D6 /* StarEmpty.png in Resources */,
 				03EA17021A19115000A429D6 /* HSTableViewRatingCell.xib in Resources */,
 				03EA170C1A1918B800A429D6 /* StarFull.png in Resources */,

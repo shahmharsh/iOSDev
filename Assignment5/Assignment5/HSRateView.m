@@ -12,6 +12,7 @@
 @implementation HSRateView
 @synthesize notSelectedImage = _notSelectedImage;
 @synthesize fullSelectedImage = _fullSelectedImage;
+@synthesize halfSelectedImage = _halfSelectedImage;
 @synthesize rating = _rating;
 @synthesize editable = _editable;
 @synthesize imageViews = _imageViews;
@@ -24,6 +25,7 @@
 - (void)baseInit {
     _notSelectedImage = [UIImage imageNamed:HSImageStarEmpty];
     _fullSelectedImage = [UIImage imageNamed:HSImageStarFull];
+    _halfSelectedImage = [UIImage imageNamed:HSImageStarHalf];
     _rating = 0;
     _editable = NO;
     _imageViews = [[NSMutableArray alloc] init];
@@ -55,6 +57,8 @@
         UIImageView *imageView = [self.imageViews objectAtIndex:i];
         if (self.rating >= i+1) {
             imageView.image = self.fullSelectedImage;
+        } else if(self.rating > i) {
+            imageView.image = self.halfSelectedImage;
         } else {
             imageView.image = self.notSelectedImage;
         }
@@ -113,7 +117,7 @@
     [self refresh];
 }
 
-- (void)setRating:(int)rating {
+- (void)setRating:(float)rating {
     _rating = rating;
     [self refresh];
 }
@@ -121,11 +125,15 @@
 - (void)handleTouchAtLocation:(CGPoint)touchLocation {
     if (!self.editable) return;
     
-    int newRating = 0;
+    float newRating = 0;
     for(int i = _imageViews.count - 1; i >= 0; i--) {
         UIImageView *imageView = [self.imageViews objectAtIndex:i];
-        if (touchLocation.x > imageView.frame.origin.x) {
+        CGFloat imageWidth = imageView.frame.size.width;
+        if (touchLocation.x > (imageView.frame.origin.x + (imageWidth/2))) {
             newRating = i+1;
+            break;
+        } else if (touchLocation.x > imageView.frame.origin.x) {
+            newRating = i + 0.5;
             break;
         }
     }
