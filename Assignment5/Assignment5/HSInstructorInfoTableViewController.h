@@ -14,10 +14,11 @@
 
 @property HSInstructor *instructor;
 @property NSMutableArray *dataArray;
+@property NSMutableArray *commentsArray;
 
 @property (strong, nonatomic) IBOutlet UITableView *instructorInfoTable;
 
 -(void) getInstructorData;
--(void) populateTable;
+-(void) populateTable:(BOOL)isComment;
 
 @end

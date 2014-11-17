@@ -35,12 +35,12 @@
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:HSGetInstructorNameURL]
                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                NSArray *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                                                for (NSInteger i=0; i < [json count]; i++) {
-                                                    NSDictionary *subDictionary = [json objectAtIndex:i];
-                                                    NSString *firstName = [subDictionary objectForKey:HSKeyFirstName];
-                                                    NSString *lastName = [subDictionary objectForKey:HSKeyLastName];
-                                                    NSUInteger instructorID = [[subDictionary objectForKey:HSKeyInstructorID] integerValue];
+                                                NSArray *instaructorsArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                for (NSInteger i=0; i < [instaructorsArray count]; i++) {
+                                                    NSDictionary *instructorDictionary = [instaructorsArray objectAtIndex:i];
+                                                    NSString *firstName = [instructorDictionary objectForKey:HSKeyFirstName];
+                                                    NSString *lastName = [instructorDictionary objectForKey:HSKeyLastName];
+                                                    NSUInteger instructorID = [[instructorDictionary objectForKey:HSKeyInstructorID] integerValue];
                                                     HSInstructor *instructor = [[HSInstructor alloc] initWithInstructorID:instructorID FirstName:firstName LastName:lastName];
                                                     [_instructors addObject:instructor];
                                                 }

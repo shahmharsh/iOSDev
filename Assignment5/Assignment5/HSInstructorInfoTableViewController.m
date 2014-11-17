@@ -18,12 +18,14 @@
 @synthesize instructor = _instructor;
 @synthesize dataArray = _dataArray;
 @synthesize instructorInfoTable = _instructorInfoTable;
+@synthesize commentsArray = _commentsArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = [_instructor fullName];
     _instructorInfoTable.rowHeight = 44;
     _dataArray = [[NSMutableArray alloc] init];
+    _commentsArray = [[NSMutableArray alloc] init];
     [self getInstructorData];
 }
 
@@ -34,9 +36,26 @@
 
 -(void)getInstructorData {
     NSURLSession *session = [NSURLSession sharedSession];
-    NSString *getInstructorInfoURL = [NSString stringWithFormat:@"%@%ld",HSGetInstructorInfoURL, (long)_instructor.instructorID];
+    
+    NSString *getInstructorCommentsURL = [NSString stringWithFormat:@"%@%ld", HSGetInstructorCommentsURL, (long)_instructor.instructorID];
+    NSURLSessionDataTask *dataTaskGetInstructorComments = [session dataTaskWithURL:[NSURL URLWithString:getInstructorCommentsURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSArray *comments = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        for (NSInteger i = 0; i < [comments count]; i++) {
+            NSDictionary *comment = [comments objectAtIndex:i];
+            NSString *text = [comment objectForKey:HSKeyCommentText];
+            [_commentsArray addObject:text];
+        }
+        
+        // reload table view data on main thread
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            [self populateTable:true];
+        });
+    }];
+
+    
+    NSString *getInstructorInfoURL = [NSString stringWithFormat:@"%@%ld", HSGetInstructorInfoURL, (long)_instructor.instructorID];
     NSURLSessionDataTask *dataTaskGetInstructorInfo = [session dataTaskWithURL:[NSURL URLWithString:getInstructorInfoURL]
-                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                               completionHandler:^(NSData *data, NSURLResponse *response,NSError *error) {
                                                 NSDictionary *instructorData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                                 NSString *office = [instructorData objectForKey:HSKeyOffice];
                                                 NSString *phone = [instructorData objectForKey:HSKeyPhone];
@@ -52,30 +71,35 @@
                                                 [_instructor setAverageRating:averageRating];
                                                 [_instructor setTotalRatings:totalRatings];
                                                 
+                                                [dataTaskGetInstructorComments resume];
                                                 // reload table view data on main thread
                                                 dispatch_async(dispatch_get_main_queue(), ^ {
-                                                    [self populateTable];
+                                                    [self populateTable:false];
                                                 });
                                             }];
-    
     [dataTaskGetInstructorInfo resume];
-
 }
 
--(void) populateTable {
-    NSArray *name = [[NSArray alloc] initWithObjects:[_instructor fullName], nil];
-    [_dataArray addObject:name];
-    NSArray *office = [[NSArray alloc] initWithObjects:[_instructor office], nil];
-    [_dataArray addObject:office];
-    NSArray *phone = [[NSArray alloc] initWithObjects:[_instructor phone], nil];
-    [_dataArray addObject:phone];
-    NSArray *email = [[NSArray alloc] initWithObjects:[_instructor email], nil];
-    [_dataArray addObject:email];
-    
-    //NSLog(@"Average: %@ Total: %ld",[_instructor averageRating], [_instructor totalRatings]);
-    NSArray *ratings = [[NSArray alloc] initWithObjects:[_instructor averageRating], [NSNumber numberWithInteger: [_instructor totalRatings]], nil];
-    NSArray *ratingArray = [[NSArray alloc] initWithObjects:ratings, nil];
-    [_dataArray addObject:ratingArray];
+-(void) populateTable:(BOOL)isComment {
+    if (!isComment) {
+        NSArray *name = [[NSArray alloc] initWithObjects:[_instructor fullName], nil];
+        [_dataArray addObject:name];
+        
+        NSArray *office = [[NSArray alloc] initWithObjects:[_instructor office], nil];
+        [_dataArray addObject:office];
+        
+        NSArray *phone = [[NSArray alloc] initWithObjects:[_instructor phone], nil];
+        [_dataArray addObject:phone];
+        
+        NSArray *email = [[NSArray alloc] initWithObjects:[_instructor email], nil];
+        [_dataArray addObject:email];
+        
+        NSArray *ratings = [[NSArray alloc] initWithObjects:[_instructor averageRating], [NSNumber numberWithInteger: [_instructor totalRatings]], nil];
+        NSArray *ratingArray = [[NSArray alloc] initWithObjects:ratings, nil];
+        [_dataArray addObject:ratingArray];
+    } else {
+        [_dataArray addObject:_commentsArray];
+    }
     
     [_instructorInfoTable reloadData];
 }
@@ -103,6 +127,8 @@
         title = HSTitleEmail;
     } else if(section == HSTableViewSectionRating) {
         title = HSTitleRating;
+    } else if(section == HSTableViewSectionComments) {
+        title = HSTitleComments;
     }
     
     return title;
@@ -127,9 +153,9 @@
         NSString *totalRatings = [NSString stringWithFormat:@"(%@)", [ratings objectAtIndex:1]];
         float decimalValue = [averageRating floatValue] - [averageRating integerValue];
         
-        if (decimalValue > 0.75) {
+        if (decimalValue > 0.66) {
             averageRating = [NSNumber numberWithInteger:([averageRating integerValue] + 1)];
-        } else if(decimalValue > 0.25){
+        } else if(decimalValue > 0.33){
             averageRating = [NSNumber numberWithFloat:([averageRating integerValue] + 0.5)];
         } else {
             averageRating = [NSNumber numberWithFloat:[averageRating integerValue]];
@@ -152,24 +178,34 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == HSTableViewSectionRating) {
+    if (section == HSTableViewSectionRating || section == HSTableViewSectionComments) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 2, (tableView.frame.size.width/2), 18)];
-        [label setFont:[UIFont boldSystemFontOfSize:17]];
-        [label setText:HSTitleRating];
+        [label setFont:[UIFont boldSystemFontOfSize:14]];
         [view addSubview:label];
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [button addTarget:self
                 action:@selector(buttonClicked:)
                 forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:HSRateNow forState:UIControlStateNormal];
-        CGSize stringSize = [HSRateNow sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
-        float buttonXPosition = tableView.frame.origin.x + tableView.frame.size.width - stringSize.width - 5;
-        [button setFrame:CGRectMake(buttonXPosition, 2, stringSize.width, 18)];
         [view addSubview:button];
         
         [view setBackgroundColor:[UIColor colorWithRed:247/255.0f green:247/255.0f blue:247/255.0f alpha:1.0f]];
+        
+        if (section == HSTableViewSectionRating) {
+            [label setText:HSTitleRating];
+            [button setTitle:HSRateNow forState:UIControlStateNormal];
+            CGSize stringSize = [HSRateNow sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+            float buttonXPosition = tableView.frame.origin.x + tableView.frame.size.width - stringSize.width - 5;
+            [button setFrame:CGRectMake(buttonXPosition, 2, stringSize.width, 18)];
+        } else {
+            [label setText:HSTitleComments];
+            [button setTitle:HSCommentNow forState:UIControlStateNormal];
+            CGSize stringSize = [HSCommentNow sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+            float buttonXPosition = tableView.frame.origin.x + tableView.frame.size.width - stringSize.width - 5;
+            [button setFrame:CGRectMake(buttonXPosition, 2, stringSize.width, 18)];
+        }
+        
         return view;
     }
     
@@ -191,8 +227,7 @@
     }
 }
 
--(void) buttonClicked:(UIButton*)sender
-{
+-(void) buttonClicked:(UIButton*)sender {
     NSLog(@"you clicked on button");
 }
 

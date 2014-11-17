@@ -10,6 +10,7 @@
 
 NSString *const HSGetInstructorNameURL;
 NSString *const HSGetInstructorInfoURL;
+NSString *const HSGetInstructorCommentsURL;
 
 NSString *const HSKeyFirstName;
 NSString *const HSKeyLastName;
@@ -20,18 +21,22 @@ NSString *const HSKeyEmail;
 NSString *const HSKeyRating;
 NSString *const HSKeyRatingAverage;
 NSString *const HSKeyRatingTotal;
+NSString *const HSKeyCommentText;
+NSString *const HSKeyCommentDate;
 
 NSString *const HSTitleName;
 NSString *const HSTitleOffice;
 NSString *const HSTitlePhone;
 NSString *const HSTitleEmail;
 NSString *const HSTitleRating;
+NSString *const HSTitleComments;
 
 NSInteger const HSTableViewSectionName;
 NSInteger const HSTableViewSectionOffice;
 NSInteger const HSTableViewSectionPhone;
 NSInteger const HSTableViewSectionEmail;
 NSInteger const HSTableViewSectionRating;
+NSInteger const HSTableViewSectionComments;
 
 NSString *const HSInstructorCellIdentifier;
 NSString *const HSInstructorInfoCellIdentifier;
@@ -45,3 +50,4 @@ NSString *const HSImageStarEmpty;
 NSString *const HSImageStarHalf;
 
 NSString *const HSRateNow;
+NSString *const HSCommentNow;
