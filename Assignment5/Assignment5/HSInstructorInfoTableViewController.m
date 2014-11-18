@@ -72,7 +72,7 @@
                                                 [_instructor setAverageRating:averageRating];
                                                 [_instructor setTotalRatings:totalRatings];
                                                 
-
+                                                [dataTaskGetInstructorComments resume];
                                                 // reload table view data on main thread
                                                 dispatch_async(dispatch_get_main_queue(), ^ {
                                                     [self populateTable:false];
@@ -249,7 +249,6 @@
             NSInteger totalRatings = [[ratings objectForKey:HSKeyRatingTotal] integerValue];
             [_instructor setAverageRating:averageRating];
             [_instructor setTotalRatings:totalRatings];
-            
             // reload table view data on main thread
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self populateTable:false];
