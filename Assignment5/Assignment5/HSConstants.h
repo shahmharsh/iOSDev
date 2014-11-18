@@ -12,6 +12,7 @@ NSString *const HSGetInstructorNameURL;
 NSString *const HSGetInstructorInfoURL;
 NSString *const HSGetInstructorCommentsURL;
 NSString *const HSPostInstructorRatingURL;
+NSString *const HSPostInstructorCommentURL;
 
 NSString *const HSKeyFirstName;
 NSString *const HSKeyLastName;
@@ -53,3 +54,6 @@ NSString *const HSImageStarHalf;
 NSString *const HSStringRateNow;
 NSString *const HSStringRate;
 NSString *const HSStringCommentNow;
+NSString *const HSStringDone;
+NSString *const HSStringCommentHere;
+

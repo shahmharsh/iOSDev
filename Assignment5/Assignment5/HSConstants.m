@@ -16,6 +16,8 @@ NSString *const HSGetInstructorInfoURL = @"http://bismarck.sdsu.edu/rateme/instr
 NSString *const HSGetInstructorCommentsURL = @"http://bismarck.sdsu.edu/rateme/comments/";
 //http://bismarck.sdsu.edu/rateme/rating/n/k k:rating, n:instructorID
 NSString *const HSPostInstructorRatingURL = @"http://bismarck.sdsu.edu/rateme/rating/";
+//http://bismarck.sdsu.edu/rateme/comment/n n:instructorID and body of post: comment
+NSString *const HSPostInstructorCommentURL = @"http://bismarck.sdsu.edu/rateme/comment/";
 
 NSString *const HSKeyFirstName = @"firstName";
 NSString *const HSKeyLastName = @"lastName";
@@ -57,3 +59,6 @@ NSString *const HSImageStarHalf = @"StarHalf.png";
 NSString *const HSStringRateNow = @"Rate Now";
 NSString *const HSStringRate = @"Rate";
 NSString *const HSStringCommentNow = @"Comment Now";
+NSString *const HSStringDone = @"Done";
+NSString *const HSStringCommentHere = @"Comment here . .";
+

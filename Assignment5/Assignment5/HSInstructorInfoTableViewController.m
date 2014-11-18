@@ -32,13 +32,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)getInstructorData {
     NSURLSession *session = [NSURLSession sharedSession];
     
-    NSString *getInstructorCommentsURL = [NSString stringWithFormat:@"%@%d", HSGetInstructorCommentsURL, _instructor.instructorID];
+    NSString *getInstructorCommentsURL = [NSString stringWithFormat:@"%@%ld", HSGetInstructorCommentsURL, (long)_instructor.instructorID];
     NSURLSessionDataTask *dataTaskGetInstructorComments = [session dataTaskWithURL:[NSURL URLWithString:getInstructorCommentsURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSArray *comments = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         for (NSInteger i = 0; i < [comments count]; i++) {
@@ -47,14 +46,13 @@
             [_commentsArray addObject:text];
         }
         
-        // reload table view data on main thread
         dispatch_async(dispatch_get_main_queue(), ^ {
             [self populateTable:true];
         });
     }];
 
     
-    NSString *getInstructorInfoURL = [NSString stringWithFormat:@"%@%d", HSGetInstructorInfoURL, _instructor.instructorID];
+    NSString *getInstructorInfoURL = [NSString stringWithFormat:@"%@%ld", HSGetInstructorInfoURL, (long)_instructor.instructorID];
     NSURLSessionDataTask *dataTaskGetInstructorInfo = [session dataTaskWithURL:[NSURL URLWithString:getInstructorInfoURL]
                                                                completionHandler:^(NSData *data, NSURLResponse *response,NSError *error) {
                                                 NSDictionary *instructorData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -73,7 +71,6 @@
                                                 [_instructor setTotalRatings:totalRatings];
                                                 
                                                 [dataTaskGetInstructorComments resume];
-                                                // reload table view data on main thread
                                                 dispatch_async(dispatch_get_main_queue(), ^ {
                                                     [self populateTable:false];
                                                 });
@@ -228,19 +225,21 @@
     }
 }
 
--(void) buttonClicked:(UIButton*)sender {
+- (void) buttonClicked:(UIButton*)sender {
+    [_instructorInfoTable setScrollEnabled:NO];
     NSString *buttonName = sender.titleLabel.text;
     if ([buttonName isEqualToString:HSStringRateNow]) {
-        HSRateAlertViewController *alert = [[HSRateAlertViewController alloc] initWithView:self.view instructorName:[_instructor fullName] delegate:self];
-        [alert show];
+        HSRateAlertViewController *rateAlert = [[HSRateAlertViewController alloc] initWithInstructorName:[_instructor fullName] delegate:self];
+        [rateAlert show];
     } else {
-        
+        HSCommentAlertView *commentAlert = [[HSCommentAlertView alloc] initWithInstructorName:[_instructor fullName] delegate:self];
+        [commentAlert show];
     }
 }
 
--(void)HSRateAlertView:(HSRateAlertViewController *)rateAlertView wasDismissedWithValue:(NSInteger)value {
-    if (value != 0) {
-        NSString *postInstructorRatingURL = [NSString stringWithFormat:@"%@%d/%d",HSPostInstructorRatingURL, _instructor.instructorID, value];
+- (void)HSRateAlertViewWasDismissedWithValue:(NSInteger)value {
+    [_instructorInfoTable setScrollEnabled:YES];
+        NSString *postInstructorRatingURL = [NSString stringWithFormat:@"%@%d/%ld",HSPostInstructorRatingURL, _instructor.instructorID, (long)value];
         NSURLSession *session = [NSURLSession sharedSession];
         NSURLSessionDataTask *dataTaskPostRatings = [session dataTaskWithURL:[NSURL URLWithString:postInstructorRatingURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             
@@ -249,15 +248,26 @@
             NSInteger totalRatings = [[ratings objectForKey:HSKeyRatingTotal] integerValue];
             [_instructor setAverageRating:averageRating];
             [_instructor setTotalRatings:totalRatings];
-            // reload table view data on main thread
+
             dispatch_async(dispatch_get_main_queue(), ^ {
                 [self populateTable:false];
             });
         }];
         
         [dataTaskPostRatings resume];
-        
-    }
+}
+
+- (void)HSRateAlertViewWasDismissed {
+    [_instructorInfoTable setScrollEnabled:YES];
+}
+
+- (void)HSCommentAlertViewWasDismissedWithComment:(NSString *)comment {
+    [_instructorInfoTable setScrollEnabled:YES];
+    NSLog(@"%@",comment);
+}
+
+- (void)HSCommentAlertViewWasDismissed {
+    [_instructorInfoTable setScrollEnabled:YES];
 }
 
 @end

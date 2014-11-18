@@ -12,13 +12,13 @@
 @class HSRateAlertViewController;
 
 @protocol HSRateAlertViewDelegate
--(void)HSRateAlertView:(HSRateAlertViewController *)rateAlertView wasDismissedWithValue:(NSInteger) value;
+- (void)HSRateAlertViewWasDismissedWithValue:(NSInteger) value;
+- (void)HSRateAlertViewWasDismissed;
 @end
 
 @interface HSRateAlertViewController : UIViewController <HSRateViewDelegate>
 @property NSInteger rating;
 @property id <HSRateAlertViewDelegate> delegate;
-@property UIView *parentView;
 @property NSString *instructorName;
 
 @property (strong, nonatomic) IBOutlet UILabel *labelInstructorName;
@@ -26,7 +26,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelTitle;
 @property (strong, nonatomic) IBOutlet UIView *container;
 
--(id)initWithView:(UIView *)view instructorName:(NSString *)instructorName delegate:(id <HSRateAlertViewDelegate>) delegate;
+- (id)initWithInstructorName:(NSString *)instructorName delegate:(id <HSRateAlertViewDelegate>) delegate;
 - (void)show;
 - (IBAction)dismiss:(id)sender;
 

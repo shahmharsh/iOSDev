@@ -18,7 +18,6 @@
 @synthesize rateView = _rateView;
 @synthesize delegate = _delegate;
 @synthesize container = _container;
-@synthesize parentView = _parentView;
 @synthesize instructorName = _instructorName;
 @synthesize labelInstructorName = _labelInstructorName;
 
@@ -42,19 +41,20 @@
     // Dispose of any resources that can be recreated.
 }
 
--(id)initWithView:(UIView *)view instructorName:(NSString *)instructorName delegate:(id<HSRateAlertViewDelegate>)delegate {
+-(id)initWithInstructorName:(NSString *)instructorName delegate:(id<HSRateAlertViewDelegate>)delegate {
     if (self = [super init]) {
         _delegate = delegate;
-        _parentView = view;
         _instructorName = instructorName;
     }
     return self;
 }
 
 -(void)show {
-    [_parentView addSubview:self.view];
-    self.view.frame = _parentView.frame;
-    self.view.center = _parentView.center;
+    id appDelegate = [[UIApplication sharedApplication] delegate];
+    UIWindow *window = [appDelegate window];
+    [window addSubview:self.view];
+    self.view.frame = window.frame;
+    self.view.center = window.center;
 }
 
 - (IBAction)dismiss:(id)sender {
@@ -62,8 +62,10 @@
     
     NSString *buttonName = ((UIButton*) sender).titleLabel.text;
     
-    if ([buttonName isEqualToString:HSStringRate]) {
-        [_delegate HSRateAlertView:self wasDismissedWithValue:_rating];
+    if ([buttonName isEqualToString:HSStringRate] && _rating != 0) {
+        [_delegate HSRateAlertViewWasDismissedWithValue:_rating];
+    } else {
+        [_delegate HSRateAlertViewWasDismissed];
     }
 }
 

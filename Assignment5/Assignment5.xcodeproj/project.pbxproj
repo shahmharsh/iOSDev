@@ -25,6 +25,8 @@
 		03EA17081A1912B300A429D6 /* HSRatingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EA17071A1912B300A429D6 /* HSRatingTableCell.m */; };
 		03EA170B1A1918B800A429D6 /* StarEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EA17091A1918B800A429D6 /* StarEmpty.png */; };
 		03EA170C1A1918B800A429D6 /* StarFull.png in Resources */ = {isa = PBXBuildFile; fileRef = 03EA170A1A1918B800A429D6 /* StarFull.png */; };
+		03F86F111A1BD7BA0022ABC8 /* HSCommentAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F86F0F1A1BD7BA0022ABC8 /* HSCommentAlertView.m */; };
+		03F86F121A1BD7BA0022ABC8 /* HSCommentAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03F86F101A1BD7BA0022ABC8 /* HSCommentAlertView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,9 @@
 		03EA17071A1912B300A429D6 /* HSRatingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSRatingTableCell.m; sourceTree = "<group>"; };
 		03EA17091A1918B800A429D6 /* StarEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarEmpty.png; sourceTree = "<group>"; };
 		03EA170A1A1918B800A429D6 /* StarFull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarFull.png; sourceTree = "<group>"; };
+		03F86F0E1A1BD7BA0022ABC8 /* HSCommentAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSCommentAlertView.h; sourceTree = "<group>"; };
+		03F86F0F1A1BD7BA0022ABC8 /* HSCommentAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSCommentAlertView.m; sourceTree = "<group>"; };
+		03F86F101A1BD7BA0022ABC8 /* HSCommentAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSCommentAlertView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +119,9 @@
 			children = (
 				0368CB4F1A15D8A000C22A01 /* AppDelegate.h */,
 				0368CB501A15D8A000C22A01 /* AppDelegate.m */,
+				03F86F0E1A1BD7BA0022ABC8 /* HSCommentAlertView.h */,
+				03F86F0F1A1BD7BA0022ABC8 /* HSCommentAlertView.m */,
+				03F86F101A1BD7BA0022ABC8 /* HSCommentAlertView.xib */,
 				035CD6D01A16F6B200D2C612 /* HSConstants.h */,
 				035CD6D11A16F6B200D2C612 /* HSConstants.m */,
 				035CD6D21A16F6B200D2C612 /* HSInstructor.h */,
@@ -122,6 +130,9 @@
 				035CD6D51A16F6B200D2C612 /* HSInstructorInfoTableViewController.m */,
 				035CD6D61A16F6B200D2C612 /* HSInstructorsTableViewController.h */,
 				035CD6D71A16F6B200D2C612 /* HSInstructorsTableViewController.m */,
+				03043CB31A1AF6CB003624B6 /* HSRateAlertViewController.h */,
+				03043CB41A1AF6CB003624B6 /* HSRateAlertViewController.m */,
+				03043CB51A1AF6CB003624B6 /* HSRateAlertViewController.xib */,
 				035CD6D81A16F6B200D2C612 /* HSRateView.h */,
 				035CD6D91A16F6B200D2C612 /* HSRateView.m */,
 				03EA17061A1912B300A429D6 /* HSRatingTableCell.h */,
@@ -131,9 +142,6 @@
 				0368CB5A1A15D8A000C22A01 /* LaunchScreen.xib */,
 				0368CB551A15D8A000C22A01 /* Main.storyboard */,
 				0368CB4B1A15D8A000C22A01 /* Supporting Files */,
-				03043CB31A1AF6CB003624B6 /* HSRateAlertViewController.h */,
-				03043CB41A1AF6CB003624B6 /* HSRateAlertViewController.m */,
-				03043CB51A1AF6CB003624B6 /* HSRateAlertViewController.xib */,
 			);
 			path = Assignment5;
 			sourceTree = "<group>";
@@ -252,6 +260,7 @@
 				0368CB571A15D8A000C22A01 /* Main.storyboard in Resources */,
 				0368CB5C1A15D8A000C22A01 /* LaunchScreen.xib in Resources */,
 				0368CB591A15D8A000C22A01 /* Images.xcassets in Resources */,
+				03F86F121A1BD7BA0022ABC8 /* HSCommentAlertView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +282,7 @@
 				035CD6DB1A16F6B200D2C612 /* HSConstants.m in Sources */,
 				0368CB511A15D8A000C22A01 /* AppDelegate.m in Sources */,
 				035CD6DE1A16F6B200D2C612 /* HSInstructorsTableViewController.m in Sources */,
+				03F86F111A1BD7BA0022ABC8 /* HSCommentAlertView.m in Sources */,
 				0368CB4E1A15D8A000C22A01 /* main.m in Sources */,
 				03EA17081A1912B300A429D6 /* HSRatingTableCell.m in Sources */,
 				035CD6DC1A16F6B200D2C612 /* HSInstructor.m in Sources */,
