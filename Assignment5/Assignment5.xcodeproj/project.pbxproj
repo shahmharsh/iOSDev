@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0338D3251A19ABD000908F64 /* StarHalf.png in Resources */ = {isa = PBXBuildFile; fileRef = 0338D3241A19ABD000908F64 /* StarHalf.png */; };
+		034201851A1AD232009DB596 /* HSRateAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 034201841A1AD232009DB596 /* HSRateAlertView.m */; };
+		034201881A1AE2E5009DB596 /* UIView+AlertAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 034201871A1AE2E5009DB596 /* UIView+AlertAnimations.m */; };
+		0342018E1A1AEF61009DB596 /* HSRateAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0342018D1A1AEF61009DB596 /* HSRateAlertView.xib */; };
 		035CD6DB1A16F6B200D2C612 /* HSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D11A16F6B200D2C612 /* HSConstants.m */; };
 		035CD6DC1A16F6B200D2C612 /* HSInstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D31A16F6B200D2C612 /* HSInstructor.m */; };
 		035CD6DD1A16F6B200D2C612 /* HSInstructorInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 035CD6D51A16F6B200D2C612 /* HSInstructorInfoTableViewController.m */; };
@@ -37,6 +40,11 @@
 
 /* Begin PBXFileReference section */
 		0338D3241A19ABD000908F64 /* StarHalf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarHalf.png; sourceTree = "<group>"; };
+		034201831A1AD232009DB596 /* HSRateAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSRateAlertView.h; sourceTree = "<group>"; };
+		034201841A1AD232009DB596 /* HSRateAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSRateAlertView.m; sourceTree = "<group>"; };
+		034201861A1AE2E5009DB596 /* UIView+AlertAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AlertAnimations.h"; sourceTree = "<group>"; };
+		034201871A1AE2E5009DB596 /* UIView+AlertAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AlertAnimations.m"; sourceTree = "<group>"; };
+		0342018D1A1AEF61009DB596 /* HSRateAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSRateAlertView.xib; sourceTree = "<group>"; };
 		035CD6D01A16F6B200D2C612 /* HSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSConstants.h; sourceTree = "<group>"; };
 		035CD6D11A16F6B200D2C612 /* HSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSConstants.m; sourceTree = "<group>"; };
 		035CD6D21A16F6B200D2C612 /* HSInstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSInstructor.h; sourceTree = "<group>"; };
@@ -126,6 +134,11 @@
 				0368CB5A1A15D8A000C22A01 /* LaunchScreen.xib */,
 				0368CB551A15D8A000C22A01 /* Main.storyboard */,
 				0368CB4B1A15D8A000C22A01 /* Supporting Files */,
+				034201831A1AD232009DB596 /* HSRateAlertView.h */,
+				034201841A1AD232009DB596 /* HSRateAlertView.m */,
+				034201861A1AE2E5009DB596 /* UIView+AlertAnimations.h */,
+				034201871A1AE2E5009DB596 /* UIView+AlertAnimations.m */,
+				0342018D1A1AEF61009DB596 /* HSRateAlertView.xib */,
 			);
 			path = Assignment5;
 			sourceTree = "<group>";
@@ -242,6 +255,7 @@
 				03EA170C1A1918B800A429D6 /* StarFull.png in Resources */,
 				0368CB571A15D8A000C22A01 /* Main.storyboard in Resources */,
 				0368CB5C1A15D8A000C22A01 /* LaunchScreen.xib in Resources */,
+				0342018E1A1AEF61009DB596 /* HSRateAlertView.xib in Resources */,
 				0368CB591A15D8A000C22A01 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,7 +280,9 @@
 				0368CB4E1A15D8A000C22A01 /* main.m in Sources */,
 				03EA17081A1912B300A429D6 /* HSRatingTableCell.m in Sources */,
 				035CD6DC1A16F6B200D2C612 /* HSInstructor.m in Sources */,
+				034201851A1AD232009DB596 /* HSRateAlertView.m in Sources */,
 				035CD6DF1A16F6B200D2C612 /* HSRateView.m in Sources */,
+				034201881A1AE2E5009DB596 /* UIView+AlertAnimations.m in Sources */,
 				035CD6DD1A16F6B200D2C612 /* HSInstructorInfoTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

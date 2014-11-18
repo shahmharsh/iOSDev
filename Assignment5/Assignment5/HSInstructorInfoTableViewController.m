@@ -9,6 +9,7 @@
 #import "HSInstructorInfoTableViewController.h"
 #import "HSConstants.h"
 #import "HSRatingTableCell.h"
+#import "HSRateAlertView.h"
 
 @interface HSInstructorInfoTableViewController ()
 
@@ -228,7 +229,8 @@
 }
 
 -(void) buttonClicked:(UIButton*)sender {
-    NSLog(@"you clicked on button");
+    HSRateAlertView *alert = [[HSRateAlertView alloc] init];
+    [alert show];
 }
 
 

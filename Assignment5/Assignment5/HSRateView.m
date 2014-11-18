@@ -154,7 +154,7 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.delegate rateView:self ratingDidChange:self.rating];
+    [self.delegate HSRateView:self ratingDidChange:self.rating];
 }
 
 

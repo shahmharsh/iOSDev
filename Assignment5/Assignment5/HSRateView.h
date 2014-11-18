@@ -12,7 +12,7 @@
 @class HSRateView;
 
 @protocol HSRateViewDelegate
-- (void)rateView:(HSRateView *)rateView ratingDidChange:(float)rating;
+- (void)HSRateView:(HSRateView *)rateView ratingDidChange:(float)rating;
 @end
 
 @interface HSRateView : UIView
