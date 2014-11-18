@@ -10,8 +10,12 @@
 #import "HSConstants.h"
 
 NSString *const HSGetInstructorNameURL = @"http://bismarck.sdsu.edu/rateme/list";
+//http://bismarck.sdsu.edu/rateme/instructor/n n:instructorID
 NSString *const HSGetInstructorInfoURL = @"http://bismarck.sdsu.edu/rateme/instructor/";
+//http://bismarck.sdsu.edu/rateme/comments/n n:instructorID
 NSString *const HSGetInstructorCommentsURL = @"http://bismarck.sdsu.edu/rateme/comments/";
+//http://bismarck.sdsu.edu/rateme/rating/n/k k:rating, n:instructorID
+NSString *const HSPostInstructorRatingURL = @"http://bismarck.sdsu.edu/rateme/rating/";
 
 NSString *const HSKeyFirstName = @"firstName";
 NSString *const HSKeyLastName = @"lastName";
@@ -50,5 +54,6 @@ NSString *const HSImageStarFull = @"StarFull.png";
 NSString *const HSImageStarEmpty = @"StarEmpty.png";
 NSString *const HSImageStarHalf = @"StarHalf.png";
 
-NSString *const HSRateNow = @"Rate Now";
-NSString *const HSCommentNow = @"Comment Now";
+NSString *const HSStringRateNow = @"Rate Now";
+NSString *const HSStringRate = @"Rate";
+NSString *const HSStringCommentNow = @"Comment Now";

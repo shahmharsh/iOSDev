@@ -128,12 +128,8 @@
     float newRating = 0;
     for(int i = _imageViews.count - 1; i >= 0; i--) {
         UIImageView *imageView = [self.imageViews objectAtIndex:i];
-        CGFloat imageWidth = imageView.frame.size.width;
-        if (touchLocation.x > (imageView.frame.origin.x + (imageWidth/2))) {
+        if (touchLocation.x > imageView.frame.origin.x) {
             newRating = i+1;
-            break;
-        } else if (touchLocation.x > imageView.frame.origin.x) {
-            newRating = i + 0.5;
             break;
         }
     }

@@ -9,7 +9,7 @@
 #import "HSInstructorInfoTableViewController.h"
 #import "HSConstants.h"
 #import "HSRatingTableCell.h"
-#import "HSRateAlertView.h"
+#import "HSRateAlertViewController.h"
 
 @interface HSInstructorInfoTableViewController ()
 
@@ -38,7 +38,7 @@
 -(void)getInstructorData {
     NSURLSession *session = [NSURLSession sharedSession];
     
-    NSString *getInstructorCommentsURL = [NSString stringWithFormat:@"%@%ld", HSGetInstructorCommentsURL, (long)_instructor.instructorID];
+    NSString *getInstructorCommentsURL = [NSString stringWithFormat:@"%@%d", HSGetInstructorCommentsURL, _instructor.instructorID];
     NSURLSessionDataTask *dataTaskGetInstructorComments = [session dataTaskWithURL:[NSURL URLWithString:getInstructorCommentsURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSArray *comments = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         for (NSInteger i = 0; i < [comments count]; i++) {
@@ -54,7 +54,7 @@
     }];
 
     
-    NSString *getInstructorInfoURL = [NSString stringWithFormat:@"%@%ld", HSGetInstructorInfoURL, (long)_instructor.instructorID];
+    NSString *getInstructorInfoURL = [NSString stringWithFormat:@"%@%d", HSGetInstructorInfoURL, _instructor.instructorID];
     NSURLSessionDataTask *dataTaskGetInstructorInfo = [session dataTaskWithURL:[NSURL URLWithString:getInstructorInfoURL]
                                                                completionHandler:^(NSData *data, NSURLResponse *response,NSError *error) {
                                                 NSDictionary *instructorData = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -72,7 +72,7 @@
                                                 [_instructor setAverageRating:averageRating];
                                                 [_instructor setTotalRatings:totalRatings];
                                                 
-                                                [dataTaskGetInstructorComments resume];
+
                                                 // reload table view data on main thread
                                                 dispatch_async(dispatch_get_main_queue(), ^ {
                                                     [self populateTable:false];
@@ -82,7 +82,7 @@
 }
 
 -(void) populateTable:(BOOL)isComment {
-    if (!isComment) {
+    [_dataArray removeAllObjects];
         NSArray *name = [[NSArray alloc] initWithObjects:[_instructor fullName], nil];
         [_dataArray addObject:name];
         
@@ -98,9 +98,9 @@
         NSArray *ratings = [[NSArray alloc] initWithObjects:[_instructor averageRating], [NSNumber numberWithInteger: [_instructor totalRatings]], nil];
         NSArray *ratingArray = [[NSArray alloc] initWithObjects:ratings, nil];
         [_dataArray addObject:ratingArray];
-    } else {
+
         [_dataArray addObject:_commentsArray];
-    }
+
     
     [_instructorInfoTable reloadData];
 }
@@ -195,14 +195,14 @@
         
         if (section == HSTableViewSectionRating) {
             [label setText:HSTitleRating];
-            [button setTitle:HSRateNow forState:UIControlStateNormal];
-            CGSize stringSize = [HSRateNow sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+            [button setTitle:HSStringRateNow forState:UIControlStateNormal];
+            CGSize stringSize = [HSStringRateNow sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
             float buttonXPosition = tableView.frame.origin.x + tableView.frame.size.width - stringSize.width - 5;
             [button setFrame:CGRectMake(buttonXPosition, 2, stringSize.width, 18)];
         } else {
             [label setText:HSTitleComments];
-            [button setTitle:HSCommentNow forState:UIControlStateNormal];
-            CGSize stringSize = [HSCommentNow sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
+            [button setTitle:HSStringCommentNow forState:UIControlStateNormal];
+            CGSize stringSize = [HSStringCommentNow sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]}];
             float buttonXPosition = tableView.frame.origin.x + tableView.frame.size.width - stringSize.width - 5;
             [button setFrame:CGRectMake(buttonXPosition, 2, stringSize.width, 18)];
         }
@@ -229,9 +229,38 @@
 }
 
 -(void) buttonClicked:(UIButton*)sender {
-    HSRateAlertView *alert = [[HSRateAlertView alloc] init];
-    [alert show];
+    NSString *buttonName = sender.titleLabel.text;
+    if ([buttonName isEqualToString:HSStringRateNow]) {
+        HSRateAlertViewController *alert = [[HSRateAlertViewController alloc] initWithView:self.view instructorName:[_instructor fullName] delegate:self];
+        [alert show];
+    } else {
+        
+    }
 }
 
+-(void)HSRateAlertView:(HSRateAlertViewController *)rateAlertView wasDismissedWithValue:(NSInteger)value {
+    if (value != 0) {
+        NSString *postInstructorRatingURL = [NSString stringWithFormat:@"%@%d/%d",HSPostInstructorRatingURL, _instructor.instructorID, value];
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSURLSessionDataTask *dataTaskPostRatings = [session dataTaskWithURL:[NSURL URLWithString:postInstructorRatingURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            
+            NSDictionary *ratings = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSNumber *averageRating = [NSNumber numberWithFloat:[[ratings objectForKey:HSKeyRatingAverage] floatValue]];
+            NSInteger totalRatings = [[ratings objectForKey:HSKeyRatingTotal] integerValue];
+            [_instructor setAverageRating:averageRating];
+            [_instructor setTotalRatings:totalRatings];
+            
+            // reload table view data on main thread
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                [self populateTable:false];
+            });
+        }];
+        
+        [dataTaskPostRatings resume];
+        
+    }
+}
 
 @end
+
+//Reference: http://www.raywenderlich.com/67081/cookbook-using-nsurlsession
