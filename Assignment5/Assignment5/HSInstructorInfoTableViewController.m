@@ -109,6 +109,20 @@
     [_instructorInfoTable reloadData];
 }
 
+
+- (void) buttonClicked:(UIButton*)sender {
+    [_instructorInfoTable setScrollEnabled:NO];
+    NSString *buttonName = sender.titleLabel.text;
+    if ([buttonName isEqualToString:HSStringRateNow]) {
+        HSRateAlertViewController *rateAlert = [[HSRateAlertViewController alloc] initWithInstructorName:[_instructor fullName] delegate:self];
+        [rateAlert show];
+    } else {
+        HSCommentAlertView *commentAlert = [[HSCommentAlertView alloc] initWithInstructorName:[_instructor fullName] delegate:self];
+        [commentAlert show];
+    }
+}
+
+
 #pragma mark - Table view data source
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -232,17 +246,21 @@
     }
 }
 
-- (void) buttonClicked:(UIButton*)sender {
-    [_instructorInfoTable setScrollEnabled:NO];
-    NSString *buttonName = sender.titleLabel.text;
-    if ([buttonName isEqualToString:HSStringRateNow]) {
-        HSRateAlertViewController *rateAlert = [[HSRateAlertViewController alloc] initWithInstructorName:[_instructor fullName] delegate:self];
-        [rateAlert show];
-    } else {
-        HSCommentAlertView *commentAlert = [[HSCommentAlertView alloc] initWithInstructorName:[_instructor fullName] delegate:self];
-        [commentAlert show];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger section = [indexPath section];
+    if (section == HSTableViewSectionComments) {
+        NSArray *array = [_dataArray objectAtIndex:section];
+        NSString *comment = [array objectAtIndex:indexPath.row];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Comment"
+                                                        message:comment
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
     }
 }
+
+#pragma mark - Delegates
 
 - (void)HSRateAlertViewWasDismissedWithValue:(NSInteger)value {
     [_instructorInfoTable setScrollEnabled:YES];
@@ -292,6 +310,8 @@
 - (void)HSCommentAlertViewWasDismissed {
     [_instructorInfoTable setScrollEnabled:YES];
 }
+
+
 
 @end
 
