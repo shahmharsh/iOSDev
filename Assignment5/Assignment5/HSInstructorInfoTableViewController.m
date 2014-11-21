@@ -20,6 +20,7 @@
 @synthesize dataArray = _dataArray;
 @synthesize instructorInfoTable = _instructorInfoTable;
 @synthesize commentsArray = _commentsArray;
+@synthesize responseData = _responseData;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,12 +35,12 @@
     [super didReceiveMemoryWarning];
 }
 
--(void)getInstructorData {
+-(void)getComments {
     NSURLSession *session = [NSURLSession sharedSession];
-    
     NSString *getInstructorCommentsURL = [NSString stringWithFormat:@"%@%ld", HSGetInstructorCommentsURL, (long)_instructor.instructorID];
     NSURLSessionDataTask *dataTaskGetInstructorComments = [session dataTaskWithURL:[NSURL URLWithString:getInstructorCommentsURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSArray *comments = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        [_commentsArray removeAllObjects];
         for (NSInteger i = 0; i < [comments count]; i++) {
             NSDictionary *comment = [comments objectAtIndex:i];
             NSString *text = [comment objectForKey:HSKeyCommentText];
@@ -47,11 +48,17 @@
         }
         
         dispatch_async(dispatch_get_main_queue(), ^ {
-            [self populateTable:true];
+            [self populateTable];
         });
     }];
-
     
+    [dataTaskGetInstructorComments resume];
+
+}
+
+-(void)getInstructorData {
+    NSURLSession *session = [NSURLSession sharedSession];
+
     NSString *getInstructorInfoURL = [NSString stringWithFormat:@"%@%ld", HSGetInstructorInfoURL, (long)_instructor.instructorID];
     NSURLSessionDataTask *dataTaskGetInstructorInfo = [session dataTaskWithURL:[NSURL URLWithString:getInstructorInfoURL]
                                                                completionHandler:^(NSData *data, NSURLResponse *response,NSError *error) {
@@ -70,33 +77,33 @@
                                                 [_instructor setAverageRating:averageRating];
                                                 [_instructor setTotalRatings:totalRatings];
                                                 
-                                                [dataTaskGetInstructorComments resume];
+                                                [self getComments];
                                                 dispatch_async(dispatch_get_main_queue(), ^ {
-                                                    [self populateTable:false];
+                                                    [self populateTable];
                                                 });
                                             }];
     [dataTaskGetInstructorInfo resume];
 }
 
--(void) populateTable:(BOOL)isComment {
+-(void) populateTable {
     [_dataArray removeAllObjects];
-        NSArray *name = [[NSArray alloc] initWithObjects:[_instructor fullName], nil];
-        [_dataArray addObject:name];
+    NSArray *name = [[NSArray alloc] initWithObjects:[_instructor fullName], nil];
+    [_dataArray addObject:name];
         
-        NSArray *office = [[NSArray alloc] initWithObjects:[_instructor office], nil];
-        [_dataArray addObject:office];
+    NSArray *office = [[NSArray alloc] initWithObjects:[_instructor office], nil];
+    [_dataArray addObject:office];
         
-        NSArray *phone = [[NSArray alloc] initWithObjects:[_instructor phone], nil];
-        [_dataArray addObject:phone];
+    NSArray *phone = [[NSArray alloc] initWithObjects:[_instructor phone], nil];
+    [_dataArray addObject:phone];
         
-        NSArray *email = [[NSArray alloc] initWithObjects:[_instructor email], nil];
-        [_dataArray addObject:email];
+    NSArray *email = [[NSArray alloc] initWithObjects:[_instructor email], nil];
+    [_dataArray addObject:email];
         
-        NSArray *ratings = [[NSArray alloc] initWithObjects:[_instructor averageRating], [NSNumber numberWithInteger: [_instructor totalRatings]], nil];
-        NSArray *ratingArray = [[NSArray alloc] initWithObjects:ratings, nil];
-        [_dataArray addObject:ratingArray];
+    NSArray *ratings = [[NSArray alloc] initWithObjects:[_instructor averageRating], [NSNumber numberWithInteger: [_instructor totalRatings]], nil];
+    NSArray *ratingArray = [[NSArray alloc] initWithObjects:ratings, nil];
+    [_dataArray addObject:ratingArray];
 
-        [_dataArray addObject:_commentsArray];
+    [_dataArray addObject:_commentsArray];
 
     
     [_instructorInfoTable reloadData];
@@ -239,10 +246,10 @@
 
 - (void)HSRateAlertViewWasDismissedWithValue:(NSInteger)value {
     [_instructorInfoTable setScrollEnabled:YES];
-        NSString *postInstructorRatingURL = [NSString stringWithFormat:@"%@%d/%ld",HSPostInstructorRatingURL, _instructor.instructorID, (long)value];
-        NSURLSession *session = [NSURLSession sharedSession];
-        NSURLSessionDataTask *dataTaskPostRatings = [session dataTaskWithURL:[NSURL URLWithString:postInstructorRatingURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            
+    
+    NSString *postInstructorRatingURL = [NSString stringWithFormat:@"%@%ld/%ld",HSPostInstructorRatingURL, (long)_instructor.instructorID, (long)value];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *dataTaskPostRatings = [session dataTaskWithURL:[NSURL URLWithString:postInstructorRatingURL] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             NSDictionary *ratings = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSNumber *averageRating = [NSNumber numberWithFloat:[[ratings objectForKey:HSKeyRatingAverage] floatValue]];
             NSInteger totalRatings = [[ratings objectForKey:HSKeyRatingTotal] integerValue];
@@ -250,11 +257,11 @@
             [_instructor setTotalRatings:totalRatings];
 
             dispatch_async(dispatch_get_main_queue(), ^ {
-                [self populateTable:false];
+                [self populateTable];
             });
         }];
         
-        [dataTaskPostRatings resume];
+    [dataTaskPostRatings resume];
 }
 
 - (void)HSRateAlertViewWasDismissed {
@@ -263,7 +270,23 @@
 
 - (void)HSCommentAlertViewWasDismissedWithComment:(NSString *)comment {
     [_instructorInfoTable setScrollEnabled:YES];
-    NSLog(@"%@",comment);
+    
+    NSString *postInstructorCommentURL = [NSString stringWithFormat:@"%@%ld",HSPostInstructorCommentURL, (long)_instructor.instructorID];
+    NSLog(@"URL: %@",postInstructorCommentURL);
+    
+    NSURL *url = [NSURL URLWithString:postInstructorCommentURL];
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[comment dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLSessionDataTask *dataTaskPostComments = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        [self getComments];
+    }];
+    
+    [dataTaskPostComments resume];
+    
 }
 
 - (void)HSCommentAlertViewWasDismissed {

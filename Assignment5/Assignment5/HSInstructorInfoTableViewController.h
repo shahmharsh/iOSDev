@@ -12,15 +12,16 @@
 #import "HSRateAlertViewController.h"
 #import "HSCommentAlertView.h"
 
-@interface HSInstructorInfoTableViewController : UITableViewController<HSRateAlertViewDelegate, HSCommentAlertViewDelegate>
+@interface HSInstructorInfoTableViewController : UITableViewController<HSRateAlertViewDelegate, HSCommentAlertViewDelegate, NSURLConnectionDelegate>
 
 @property HSInstructor *instructor;
 @property NSMutableArray *dataArray;
 @property NSMutableArray *commentsArray;
+@property NSMutableData *responseData;
 
 @property (strong, nonatomic) IBOutlet UITableView *instructorInfoTable;
 
 -(void) getInstructorData;
--(void) populateTable:(BOOL)isComment;
+-(void) populateTable;
 
 @end
